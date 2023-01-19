@@ -56,7 +56,17 @@ function getWeatherData(lon, lat) {
         .then(function (data) {
             console.log("new data");
             console.log(data);
-            return data 
-    
+            //return data 
+            displayFiveDayCast(data.list)
+            //console.log(data.list[0].main);
     })
 }
+
+function displayFiveDayCast(data) {
+    console.log("hi");
+    for(let i = 0; i < data.length; i++) {
+        console.log(data[i].main)
+        console.log(data[i].dt_txt)
+    } 
+}
+
