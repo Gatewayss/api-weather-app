@@ -7,3 +7,8 @@ li {
     background-color: lightgray;
     margin-bottom: .3em;
 }
+
+.weather-block-style {
+    background-color: lightgray;
+    width: 10em;
+}
