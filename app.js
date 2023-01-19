@@ -2,6 +2,12 @@ const cityList = document.getElementById('city-list')
 const input = document.getElementById('input')
 const searchBtn = document.getElementById('search-button')
 const APIkey = "dfd0c7f39b9f657980e8a100580bb12c"
+const currentDate = document.getElementById('current-date')
+console.log(currentDate);
+const city = document.getElementById('current-city')
+const temp = document.getElementById('current-temp')
+const wind = document.getElementById('current-wind')
+const humidity = document.getElementById('current-humidity')
 
 // https://api.openweathermap.org/data/2.5/weather?q=peshawar&appid=dfd0c7f39b9f657980e8a100580bb12c
 
@@ -20,9 +26,6 @@ searchBtn.addEventListener('click', function (e) {
     clearText()
 })
 
-
-
-
 function checkValidAPI() {
     let city = input.value
     let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
@@ -31,7 +34,7 @@ function checkValidAPI() {
             if (response.status === 404) {
                 alert("not a city, please try again ");
                 //responseText.textContent = response.status
-            } 
+            }
         })
     requestData(queryURL);
 }
@@ -56,17 +59,25 @@ function getWeatherData(lon, lat) {
         .then(function (data) {
             console.log("new data");
             console.log(data);
-            //return data 
             displayFiveDayCast(data.list)
+            todayDisplay(data.city.name, data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity)
+            //console.log(data.list[0].main.humidity);
             //console.log(data.list[0].main);
-    })
+        })
 }
 
 function displayFiveDayCast(data) {
     console.log("hi");
-    for(let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         console.log(data[i].main)
-        console.log(data[i].dt_txt)
-    } 
+        
+    }
 }
 
+// display the current weather info for the present
+function todayDisplay(name, curTemp, curWind, curHumidity) {
+    city.textContent = name
+    temp.textContent = curTemp
+    wind.textContent = curWind + " MPH"
+    humidity.textContent = curHumidity + " %"
+}
