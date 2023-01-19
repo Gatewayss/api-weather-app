@@ -5,10 +5,12 @@ const APIkey = "dfd0c7f39b9f657980e8a100580bb12c"
 const currentDate = document.getElementById('current-date')
 console.log(currentDate);
 const city = document.getElementById('current-city')
+const date = document.getElementById('current-date')
 const temp = document.getElementById('current-temp')
 const wind = document.getElementById('current-wind')
 const humidity = document.getElementById('current-humidity')
 
+const weatherBlockDate = document.querySelectorAll('#weather-block-date')
 // https://api.openweathermap.org/data/2.5/weather?q=peshawar&appid=dfd0c7f39b9f657980e8a100580bb12c
 
 
@@ -59,25 +61,26 @@ function getWeatherData(lon, lat) {
         .then(function (data) {
             console.log("new data");
             console.log(data);
-            displayFiveDayCast(data.list)
-            todayDisplay(data.city.name, data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity)
-            //console.log(data.list[0].main.humidity);
+            displayFiveDayCast(data)
+            todayDisplay(data.city.name, data.list[0].dt_txt.slice(0, 11), data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity)
+            //console.log(data.list[0].dt_txt);
             //console.log(data.list[0].main);
         })
 }
 
 function displayFiveDayCast(data) {
     console.log("hi");
-    for (let i = 0; i < data.length; i++) {
-        console.log(data[i].main)
-        
+    for (let i = 0; i < weatherBlockDate.length; i++) {
+        console.log(weatherBlockDate[i].textContent = data.list[i].dt_txt);
     }
 }
 
 // display the current weather info for the present
-function todayDisplay(name, curTemp, curWind, curHumidity) {
+function todayDisplay(name, curDate, curTemp, curWind, curHumidity) {
     city.textContent = name
+    date.textContent = curDate
     temp.textContent = curTemp
     wind.textContent = curWind + " MPH"
     humidity.textContent = curHumidity + " %"
+
 }
