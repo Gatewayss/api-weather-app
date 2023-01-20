@@ -13,7 +13,7 @@
     <link href="./styles.css" rel="stylesheet" />
   </head>
   <body>
-    <header class="container">
+    <header class="container shadow p-3 mb-5 bg-body rounded">
       <h1>Weather Dashboard</h1>
     </header>
 
@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col">
           <form class="container">
-            <label>Search for a city:</label>
+            <label class="search-txt">Search for a city:</label>
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -40,7 +40,7 @@
         </div>
         <div class="col-7">
           <section id="current-day">
-            <div class="card">
+            <div class="container shadow p-3 mb-5 bg-body rounded">
               <div class="card-body">
                 <p>City: <span id="current-city"></span
                 ></p>
@@ -59,9 +59,9 @@
         <h2>Five day forecast: </h2>
       </div>
        
-      <div class="row">
-        <div class="col"></div>
-            <div id="weather-block-1" class="weather-block-style">
+      <div class="row mx-auto">
+        <div class="col">
+            <div id="weather-block-1" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
                 <span id="weather-block-date"></span>
                 <span id="icon"></span>
                 <p>Temp:</p>
@@ -70,9 +70,10 @@
                 <span id="current-wind-1"></span>
                 <p>Humidity:</p>
                 <span id="current-humidity-1"></span>
+              </div>
             </div>
-            <div class="col"></div>
-            <div id="weather-block-2" class="weather-block-style">
+            <div class="col">
+            <div id="weather-block-2" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
                 <span id="weather-block-date"></span>
                 <span id="icon"></span>
                 <p>Temp:</p>
@@ -81,9 +82,10 @@
                 <span id="current-wind-2"></span>
                 <p>Humidity:</p>
                 <span id="current-humidity-2"></span>
+              </div>
             </div>
-            <div class="col"></div>
-            <div id="weather-block-3" class="weather-block-style">
+            <div class="col">
+            <div id="weather-block-3" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
                 <span id="weather-block-date"></span>
                 <span id="icon"></span>
                 <p>Temp:</p>
@@ -92,9 +94,10 @@
                 <span id="current-wind-3"></span>
                 <p>Humidity:</p>
                 <span id="current-humidity-3"></span>
+              </div>
             </div>
-            <div class="col"></div>
-            <div id="weather-block-4" class="weather-block-style">
+            <div class="col">
+            <div id="weather-block-4" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
                 <span id="weather-block-date"></span>
                 <span id="icon"></span>
                 <p>Temp:</p>
@@ -103,9 +106,10 @@
                 <span id="current-wind-4"></span>
                 <p>Humidity:</p>
                 <span id="current-humidity-4"></span>
+              </div>
             </div>
-            <div class="col"></div>
-            <div id="weather-block-5" class="weather-block-style">
+            <div class="col">
+            <div id="weather-block-5" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
                 <span id="weather-block-date"></span>
                 <span id="icon"></span>
                 <p>Temp:</p>
@@ -114,6 +118,7 @@
                 <span id="current-wind-5"></span>
                 <p>Humidity:</p>
                 <span id="current-humidity-5"></span>
+              </div>
             </div>
       </div>
     </div>
