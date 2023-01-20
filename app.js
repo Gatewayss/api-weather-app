@@ -53,11 +53,7 @@ function requestData(queryURL) {
 }
 
 function getWeatherData(lon, lat) {
-    let apiCall = "https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=" + lat + "&lon=" + lon + "&dt=daily&appid=" + APIkey
-
-    console.log(apiCall);
-
-    //let apiCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey
+    let apiCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey
     fetch(apiCall)
         .then(function (response) {
             return response.json();
@@ -86,5 +82,4 @@ function todayDisplay(name, curDate, curTemp, curWind, curHumidity) {
     temp.textContent = curTemp
     wind.textContent = curWind + " MPH"
     humidity.textContent = curHumidity + " %"
-
 }
