@@ -6,9 +6,28 @@ ul {
 li {
     background-color: lightgray;
     margin-bottom: .3em;
+    padding: .3em;
+    border-radius: 3px;
 }
 
 .weather-block-style {
-    background-color: lightgray;
     width: 10em;
+}
+
+body {
+    padding: 2em;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    padding: 1em;
+}
+
+.search-txt {
+    padding: .3em;;
 }
