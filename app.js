@@ -70,10 +70,21 @@ function getWeatherData(lon, lat) {
 
 function displayFiveDayCast(data) {
     console.log("hi");
-    for (let i = 0; i < weatherBlockDate.length; i++) {
-        console.log(weatherBlockDate[i].textContent = data.list[i].dt_txt);
+
+    for (let i = 0; i < 5; i++) {
+        var startDt = dayjs().add([i], 'day').startOf('day').toString();
+        
+        var endDt = dayjs().add([i], 'day').subtract(12, 'hour').endOf('day');
+        
+        weatherBlockDate[i].textContent = startDt.slice(0,12)  
+        
+        
+        }
     }
-}
+
+
+
+
 
 // display the current weather info for the present
 function todayDisplay(name, curDate, curTemp, curWind, curHumidity) {
