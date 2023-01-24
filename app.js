@@ -33,7 +33,7 @@ function clearText() {
 // check if api request is valid and alert user if not 
 function checkValidAPI() {
     let city = input.value
-    let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
     fetch(queryURL)
         .then(function (response) {
             if (response.status === 404) {
@@ -57,7 +57,7 @@ function requestData(queryURL) {
 
 // requests the data for a 5 day, every 3 hour weather forecast for the city 
 function getWeatherData(lon, lat) {
-    let apiCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey
+    let apiCall = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey
     fetch(apiCall)
         .then(function (response) {
             return response.json();
@@ -102,11 +102,11 @@ function displayFiveDayCast(data) {
     let iconThree = data.list[16].weather[0].icon;
     let iconFour = data.list[24].weather[0].icon;
     let iconFive = data.list[32].weather[0].icon;
-    let iconURL = "http://openweathermap.org/img/w/" + iconOne + ".png"
-    let iconURL2 = "http://openweathermap.org/img/w/" + iconTwo + ".png"
-    let iconURL3 = "http://openweathermap.org/img/w/" + iconThree + ".png"
-    let iconURL4 = "http://openweathermap.org/img/w/" + iconFour + ".png"
-    let iconURL5 = "http://openweathermap.org/img/w/" + iconFive + ".png"
+    let iconURL = "https://openweathermap.org/img/w/" + iconOne + ".png"
+    let iconURL2 = "https://openweathermap.org/img/w/" + iconTwo + ".png"
+    let iconURL3 = "https://openweathermap.org/img/w/" + iconThree + ".png"
+    let iconURL4 = "https://openweathermap.org/img/w/" + iconFour + ".png"
+    let iconURL5 = "https://openweathermap.org/img/w/" + iconFive + ".png"
     
     weatherBlockIcon[0].src = iconURL
     weatherBlockIcon[1].src = iconURL2
@@ -118,7 +118,7 @@ function displayFiveDayCast(data) {
 
 // display the current weather info for the present day 
 function todayDisplay(name, todayDate, todayTemp, todayWind, todayHumidity, todayIcon) {
-    let iconURL = "http://openweathermap.org/img/w/" + todayIcon + ".png"
+    let iconURL = "https://openweathermap.org/img/w/" + todayIcon + ".png"
     curIcon.src = iconURL
     curCity.textContent = name
     curDate.textContent = todayDate
