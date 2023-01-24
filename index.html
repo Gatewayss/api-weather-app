@@ -11,14 +11,14 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous" />
     <link href="./styles.css" rel="stylesheet" />
-
   </head>
   <body>
     <header class="container shadow p-3 mb-5 bg-body rounded">
       <h1>Weather Dashboard</h1>
     </header>
 
-    <br class="container">
+    <!-- search for city and list of past searches -->
+    <form class="container">
       <div class="row">
         <div class="col">
           <form class="container">
@@ -39,6 +39,8 @@
             <ul id="city-list"></ul>
           </form>
         </div>
+
+        <!-- current city weather display container -->
         <div class="col-7">
           <section id="current-day">
             <div class="container shadow p-3 mb-5 bg-body rounded">
@@ -61,6 +63,7 @@
         <h2>Five day forecast: </h2>
       </div>
        
+      <!-- 5 day weather forecast containers -->
       <div class="row mx-auto">
         <div class="col">
             <div id="weather-block-1" class="weather-block-style container shadow p-3 mb-5 bg-body rounded">
@@ -125,7 +128,6 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
