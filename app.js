@@ -8,12 +8,12 @@ const date = document.getElementById('current-date')
 const temp = document.getElementById('current-temp')
 const wind = document.getElementById('current-wind')
 const humidity = document.getElementById('current-humidity')
+const icon = document.getElementById('current-icon')
 const weatherBlockTemp = document.querySelectorAll('#weather-block-temp')
 const weatherBlockWind = document.querySelectorAll('#weather-block-wind')
 const weatherBlockDate = document.querySelectorAll('#weather-block-date')
 const weatherBlockHum = document.querySelectorAll('#weather-block-humidity')
-// https://api.openweathermap.org/data/2.5/weather?q=peshawar&appid=dfd0c7f39b9f657980e8a100580bb12c
-
+const weatherBlockIcon = document.querySelectorAll('#icon')
 
 function clearText() {
     input.value = "";
@@ -22,11 +22,10 @@ function clearText() {
 searchBtn.addEventListener('click', function (e) {
     e.preventDefault()
     let text = input.value
-    let li = document.createElement('li')
+    const li = document.createElement('li')
     li.textContent = text
     cityList.appendChild(li)
     checkValidAPI()
-    clearText()
 })
 
 function checkValidAPI() {
@@ -63,42 +62,63 @@ function getWeatherData(lon, lat) {
             console.log("new data");
             console.log(data);
             displayFiveDayCast(data)
-            todayDisplay(data.city.name, data.list[0].dt_txt.slice(0, 11), data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity)
+            todayDisplay(data.city.name, data.list[0].dt_txt.slice(0, 11), data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity, data.list[0].weather[0].icon)
         })
 }
 
 function displayFiveDayCast(data) {
-        weatherBlockDate[0].textContent = data.list[0].dt_txt.slice(0, 11)
-        weatherBlockDate[1].textContent = data.list[8].dt_txt.slice(0, 11)
-        weatherBlockDate[2].textContent = data.list[16].dt_txt.slice(0, 11)
-        weatherBlockDate[3].textContent = data.list[24].dt_txt.slice(0, 11)
-        weatherBlockDate[4].textContent = data.list[32].dt_txt.slice(0, 11)
+    weatherBlockDate[0].textContent = data.list[0].dt_txt.slice(0, 11)
+    weatherBlockDate[1].textContent = data.list[8].dt_txt.slice(0, 11)
+    weatherBlockDate[2].textContent = data.list[16].dt_txt.slice(0, 11)
+    weatherBlockDate[3].textContent = data.list[24].dt_txt.slice(0, 11)
+    weatherBlockDate[4].textContent = data.list[32].dt_txt.slice(0, 11)
 
-        weatherBlockTemp[0].textContent = data.list[0].main.temp + "°"
-        weatherBlockTemp[1].textContent = data.list[8].main.temp + "°"
-        weatherBlockTemp[2].textContent = data.list[16].main.temp + "°"
-        weatherBlockTemp[3].textContent = data.list[24].main.temp + "°"
-        weatherBlockTemp[4].textContent = data.list[32].main.temp + "°"
+    weatherBlockTemp[0].textContent = data.list[0].main.temp + "°"
+    weatherBlockTemp[1].textContent = data.list[8].main.temp + "°"
+    weatherBlockTemp[2].textContent = data.list[16].main.temp + "°"
+    weatherBlockTemp[3].textContent = data.list[24].main.temp + "°"
+    weatherBlockTemp[4].textContent = data.list[32].main.temp + "°"
 
-        weatherBlockWind[0].textContent = data.list[0].wind.speed + " MPH"
-        weatherBlockWind[1].textContent = data.list[8].wind.speed + " MPH"
-        weatherBlockWind[2].textContent = data.list[16].wind.speed + " MPH"
-        weatherBlockWind[3].textContent = data.list[24].wind.speed + " MPH"
-        weatherBlockWind[4].textContent = data.list[32].wind.speed + " MPH"
+    weatherBlockWind[0].textContent = data.list[0].wind.speed + " MPH"
+    weatherBlockWind[1].textContent = data.list[8].wind.speed + " MPH"
+    weatherBlockWind[2].textContent = data.list[16].wind.speed + " MPH"
+    weatherBlockWind[3].textContent = data.list[24].wind.speed + " MPH"
+    weatherBlockWind[4].textContent = data.list[32].wind.speed + " MPH"
 
-        weatherBlockHum[0].textContent = data.list[0].main.humidity + " %"
-        weatherBlockHum[1].textContent = data.list[8].main.humidity + " %"
-        weatherBlockHum[2].textContent = data.list[16].main.humidity + " %"
-        weatherBlockHum[3].textContent = data.list[24].main.humidity + " %"
-        weatherBlockHum[4].textContent = data.list[32].main.humidity + " %"
+    weatherBlockHum[0].textContent = data.list[0].main.humidity + " %"
+    weatherBlockHum[1].textContent = data.list[8].main.humidity + " %"
+    weatherBlockHum[2].textContent = data.list[16].main.humidity + " %"
+    weatherBlockHum[3].textContent = data.list[24].main.humidity + " %"
+    weatherBlockHum[4].textContent = data.list[32].main.humidity + " %"
+
+    let iconOne = data.list[0].weather[0].icon;
+    let iconTwo = data.list[8].weather[0].icon;
+    let iconThree = data.list[16].weather[0].icon;
+    let iconFour = data.list[24].weather[0].icon;
+    let iconFive = data.list[32].weather[0].icon;
+    let iconURL = "http://openweathermap.org/img/w/" + iconOne + ".png"
+    let iconURL2 = "http://openweathermap.org/img/w/" + iconTwo + ".png"
+    let iconURL3 = "http://openweathermap.org/img/w/" + iconThree + ".png"
+    let iconURL4 = "http://openweathermap.org/img/w/" + iconFour + ".png"
+    let iconURL5 = "http://openweathermap.org/img/w/" + iconFive + ".png"
+    
+    weatherBlockIcon[0].src = iconURL
+    weatherBlockIcon[1].src = iconURL2
+    weatherBlockIcon[2].src = iconURL3
+    weatherBlockIcon[3].src = iconURL4
+    weatherBlockIcon[4].src = iconURL5
 }
 
 
 // display the current weather info for the present
-function todayDisplay(name, curDate, curTemp, curWind, curHumidity) {
+function todayDisplay(name, curDate, curTemp, curWind, curHumidity, curIcon) {
+    
+    let iconURL = "http://openweathermap.org/img/w/" + curIcon + ".png"
+    icon.src = iconURL
     city.textContent = name
     date.textContent = curDate
     temp.textContent = curTemp + "°"
     wind.textContent = curWind + " MPH"
     humidity.textContent = curHumidity + " %"
 }
+
