@@ -2,23 +2,19 @@ const cityList = document.getElementById('city-list')
 const input = document.getElementById('input')
 const searchBtn = document.getElementById('search-button')
 const APIkey = "dfd0c7f39b9f657980e8a100580bb12c"
-const currentDate = document.getElementById('current-date')
-const city = document.getElementById('current-city')
-const date = document.getElementById('current-date')
-const temp = document.getElementById('current-temp')
-const wind = document.getElementById('current-wind')
-const humidity = document.getElementById('current-humidity')
-const icon = document.getElementById('current-icon')
-const weatherBlockTemp = document.querySelectorAll('#weather-block-temp')
-const weatherBlockWind = document.querySelectorAll('#weather-block-wind')
-const weatherBlockDate = document.querySelectorAll('#weather-block-date')
-const weatherBlockHum = document.querySelectorAll('#weather-block-humidity')
-const weatherBlockIcon = document.querySelectorAll('#icon')
+const curCity = document.getElementById('current-city')
+const curDate = document.getElementById('current-date')
+const curTemp = document.getElementById('current-temp')
+const curWind = document.getElementById('current-wind')
+const curHumidity = document.getElementById('current-humidity')
+const curIcon = document.getElementById('current-icon')
+const weatherBlockTemp = document.querySelectorAll('.weather-block-temp')
+const weatherBlockWind = document.querySelectorAll('.weather-block-wind')
+const weatherBlockDate = document.querySelectorAll('.weather-block-date')
+const weatherBlockHum = document.querySelectorAll('.weather-block-humidity')
+const weatherBlockIcon = document.querySelectorAll('.icon')
 
-function clearText() {
-    input.value = "";
-}
-
+// search for city by name 
 searchBtn.addEventListener('click', function (e) {
     e.preventDefault()
     let text = input.value
@@ -26,8 +22,15 @@ searchBtn.addEventListener('click', function (e) {
     li.textContent = text
     cityList.appendChild(li)
     checkValidAPI()
+    clearText()
 })
 
+// clear text input after entering a city
+function clearText() {
+    input.value = "";
+}
+
+// check if api request is valid and alert user if not 
 function checkValidAPI() {
     let city = input.value
     let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey;
@@ -35,23 +38,24 @@ function checkValidAPI() {
         .then(function (response) {
             if (response.status === 404) {
                 alert("not a city, please try again ");
-                //responseText.textContent = response.status
             }
         })
+    // if valid the data will be requested 
     requestData(queryURL);
 }
 
+// returns the longitude and latitude of the city for the to make the second api call
 function requestData(queryURL) {
     fetch(queryURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             getWeatherData(data.coord.lon, data.coord.lat)
         });
 }
 
+// requests the data for a 5 day, every 3 hour weather forecast for the city 
 function getWeatherData(lon, lat) {
     let apiCall = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkey
     fetch(apiCall)
@@ -59,13 +63,15 @@ function getWeatherData(lon, lat) {
             return response.json();
         })
         .then(function (data) {
-            console.log("new data");
-            console.log(data);
+            // returns data to be displayed if the five day cast section 
             displayFiveDayCast(data)
+            // returns the current forecast for the current weather section 
             todayDisplay(data.city.name, data.list[0].dt_txt.slice(0, 11), data.list[0].main.temp, data.list[0].wind.speed, data.list[0].main.humidity, data.list[0].weather[0].icon)
+            console.log(data);
         })
 }
 
+// returns the data for the weather at 12am each day for the 5 day forecast section 
 function displayFiveDayCast(data) {
     weatherBlockDate[0].textContent = data.list[0].dt_txt.slice(0, 11)
     weatherBlockDate[1].textContent = data.list[8].dt_txt.slice(0, 11)
@@ -110,15 +116,14 @@ function displayFiveDayCast(data) {
 }
 
 
-// display the current weather info for the present
-function todayDisplay(name, curDate, curTemp, curWind, curHumidity, curIcon) {
-    
-    let iconURL = "http://openweathermap.org/img/w/" + curIcon + ".png"
-    icon.src = iconURL
-    city.textContent = name
-    date.textContent = curDate
-    temp.textContent = curTemp + "°"
-    wind.textContent = curWind + " MPH"
-    humidity.textContent = curHumidity + " %"
+// display the current weather info for the present day 
+function todayDisplay(name, todayDate, todayTemp, todayWind, todayHumidity, todayIcon) {
+    let iconURL = "http://openweathermap.org/img/w/" + todayIcon + ".png"
+    curIcon.src = iconURL
+    curCity.textContent = name
+    curDate.textContent = todayDate
+    curTemp.textContent = todayTemp + "°"
+    curWind.textContent = todayWind + " MPH"
+    curHumidity.textContent = todayHumidity + " %"
 }
 
